@@ -31,25 +31,24 @@ import java.util.*;
 
 public class HTMLExporter implements Table.Exporter {
 	private final Writer out;
-	private int width;
 
 	public HTMLExporter(Writer out) {
 		this.out = out;
 	}
 
-	public void storeMetadata(String tableName, int width, int height, Iterator columnNames) throws IOException
-
-	{
-		this.width = width;
-		out.write("<head><title>");
-		out.write(tableName == null ? "<anonymous>" : tableName);
-		out.write("</title></head>");
-		out.write("\n");
+	public void storeMetadata(String tableName, int width, int height, Iterator columnNames) throws IOException {
+		out.write("<head>\n<title>");
+		out.write(tableName == null ? "anonymous table" : tableName);
+		out.write("\t</title>\n</head>");
+		out.write("\n\n");
+		out.write("<body>\n");
+		out.write(tableName == null ? "anonymous table" : tableName);
+		out.write("<br/>\n<table border =\"1\">\n\n");
 		storeRow(columnNames); // comma separated list of columns ids
 	}
 
 	public void storeRow(Iterator data) throws IOException {
-		out.write("<tr>\n");
+		out.write("<tr>");
 		while (data.hasNext()) {
 			Object datum = data.next();
 			out.write("\t<td>");
@@ -61,8 +60,15 @@ public class HTMLExporter implements Table.Exporter {
 	}
 
 	public void startTable() throws IOException {
-		/* nothing to do */}
+		out.write("<html>\n");
+		/* nothing to do */
+	}
 
 	public void endTable() throws IOException {
-		/* nothing to do */}
+
+		out.write("\n");
+		out.write("</body>\n");
+		out.write("</html>");
+
+	}
 }

@@ -10,8 +10,6 @@ import com.holub.text.ParseFailure;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-//@workhorse-end
-//--------------------------------------------------------------
 public class TestDatabase {
 	@Test
 	public void Default() throws IOException, ParseFailure {
