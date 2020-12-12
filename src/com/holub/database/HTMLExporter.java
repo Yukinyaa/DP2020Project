@@ -29,40 +29,40 @@ package com.holub.database;
 import java.io.*;
 import java.util.*;
 
+public class HTMLExporter implements Table.Exporter {
+	private final Writer out;
+	private int width;
 
-public class HTMLExporter implements Table.Exporter
-{	private final Writer out;
-	private 	  int	 width;
-
-	public HTMLExporter( Writer out )
-	{	this.out = out;
+	public HTMLExporter(Writer out) {
+		this.out = out;
 	}
 
-	public void storeMetadata( String tableName,
-							   int width,
-							   int height,
-							   Iterator columnNames ) throws IOException
+	public void storeMetadata(String tableName, int width, int height, Iterator columnNames) throws IOException
 
-	{	this.width = width;
+	{
+		this.width = width;
 		out.write("<head><title>");
-		out.write(tableName == null ? "<anonymous>" : tableName );
+		out.write(tableName == null ? "<anonymous>" : tableName);
 		out.write("</title></head>");
 		out.write("\n");
-		storeRow( columnNames ); // comma separated list of columns ids
+		storeRow(columnNames); // comma separated list of columns ids
 	}
-	public void storeRow( Iterator data ) throws IOException
-	{	
-		out.write( "<tr>\n" );
-		while( data.hasNext() )
-		{	Object datum = data.next();
-			out.write( "\t<td>" );
-			out.write( datum.toString() );
-			out.write( "</td>\n" );
+
+	public void storeRow(Iterator data) throws IOException {
+		out.write("<tr>\n");
+		while (data.hasNext()) {
+			Object datum = data.next();
+			out.write("\t<td>");
+			out.write(datum.toString());
+			out.write("</td>\n");
 		}
-		out.write( "</tr>" );
+		out.write("</tr>");
 		out.write("\n");
 	}
 
-	public void startTable() throws IOException {/*nothing to do*/}
-	public void endTable()   throws IOException {/*nothing to do*/}
+	public void startTable() throws IOException {
+		/* nothing to do */}
+
+	public void endTable() throws IOException {
+		/* nothing to do */}
 }
