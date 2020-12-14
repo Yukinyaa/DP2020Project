@@ -1,10 +1,9 @@
 package com.holub.database.tests;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 import com.holub.database.*;
+import com.holub.database.Table.Exporter;
 import com.holub.text.ParseFailure;
 
 import org.junit.Test;
@@ -48,5 +47,35 @@ public class TestDatabase {
 		theDatabase.dump();
 
 		System.out.println("Database PASSED");
+	}
+	@Test
+	public void DoJoinTest() throws IOException, ParseFailure
+	{
+		Database theDatabase = new Database("c:\\dp2020\\");
+		Table result;
+		result = theDatabase.execute("select addrId from address, name where address.addrId = name.addrId");
+		
+        Writer out = new StringWriter();
+		Exporter exporter = new CSVExporter(out);
+		result.export(exporter);
+
+		System.out.println(out.toString());
+		
+		result = theDatabase.execute("select * from address");
+		
+        out = new StringWriter();
+		exporter = new CSVExporter(out);
+		result.export(exporter);
+
+		System.out.println(out.toString());
+		
+
+		result = theDatabase.execute("select * from address, name where address.addrId = name.addrId");
+
+		out = new StringWriter();
+		exporter = new CSVExporter(out);
+		result.export(exporter);
+
+		System.out.println(out.toString());
 	}
 }
