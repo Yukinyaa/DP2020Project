@@ -1,13 +1,11 @@
-package com.holub.database.tests;
+package com.holub.database;
 
 import java.io.*;
 
-import com.holub.database.*;
 import com.holub.database.Table.Exporter;
 import com.holub.text.ParseFailure;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class TestDatabase {
 	@Test
