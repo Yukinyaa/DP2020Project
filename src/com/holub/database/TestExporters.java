@@ -29,7 +29,10 @@ public class TestExporters {
 
         t.export(he);
         System.out.println(out.toString());
-
+        File file = new File("c:/dp2020/test.html");
+        BufferedWriter w = new BufferedWriter(new FileWriter(file));
+        w.write(out.toString());
+        w.close();
     }
     
     @Test
